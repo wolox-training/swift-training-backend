@@ -6,12 +6,14 @@ Config/secrets
 
 ### Vapor Patch ###
 Packages
+
+# End of https://www.gitignore.io/api/vapor
+Package.resolved
+
+# Mac Noise
 .build
 xcuserdata
 *.xcodeproj
 DerivedData/
 .DS_Store
 */.DS_Store
-
-# End of https://www.gitignore.io/api/vapor
-Package.resolved
