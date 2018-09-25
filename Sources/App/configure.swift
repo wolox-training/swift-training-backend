@@ -14,7 +14,12 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(postgresqlConfig)
     
     var migrations = MigrationConfig()
-    // TODO: Add models for migration
+    migrations.add(model: Book.self, database: .psql)
+    migrations.add(model: User.self, database: .psql)
+    migrations.add(model: Rent.self, database: .psql)
+    migrations.add(model: Wish.self, database: .psql)
+    migrations.add(model: Comment.self, database: .psql)
+    migrations.add(model: Suggestion.self, database: .psql)
     services.register(migrations)
 }
 
