@@ -5,11 +5,11 @@ import Pagination
 final class Book: PostgreSQLModel {
     
     var id: Int?
-    let author: String
-    let title: String
-    let image: String?
-    let year: String
-    let genre: String
+    var author: String
+    var title: String
+    var image: String?
+    var year: String
+    var genre: String
     
     init(id: Int? = nil, author: String, title: String, image: String?, year: String, genre: String) {
         self.id = id
