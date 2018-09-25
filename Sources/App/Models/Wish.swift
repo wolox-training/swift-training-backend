@@ -29,9 +29,7 @@ extension Wish {
 extension Wish: Mappable {
     
     func toDictionary() -> [String : Any] {
-        return [
-            "id": id
-        ]
+        return ["id": id]
     }
 }
 

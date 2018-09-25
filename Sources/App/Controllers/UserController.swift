@@ -8,7 +8,7 @@ final class UserController: BaseController {
     }
     
     func listComments(_ req: Request) throws -> Future<Response> {
-        let future = try req.parameters.next(User.self).flatMap { user in
+        let futureComments = try req.parameters.next(User.self).flatMap { user in
             return try user.comments
                 .query(on: req)
                 .join(\Book.id, to: \Comment.bookID)
@@ -18,7 +18,7 @@ final class UserController: BaseController {
                 .all()
         }
         
-        return future.map { tuples in
+        return futureComments.map { tuples in
             
             let data = tuples.map { [unowned self] tuple in
                 self.createComment(comment: tuple.0.0, book: tuple.0.1, user: tuple.1)
@@ -30,7 +30,7 @@ final class UserController: BaseController {
     }
     
     func listRents(_ req: Request) throws -> Future<Response> {
-        let future = try req.parameters.next(User.self).flatMap { user in
+        let futureRents = try req.parameters.next(User.self).flatMap { user in
             return try user.rents
                 .query(on: req)
                 .join(\Book.id, to: \Rent.bookID)
@@ -40,7 +40,7 @@ final class UserController: BaseController {
                 .all()
         }
         
-        return future.map { tuples in
+        return futureRents.map { tuples in
             
             let data = tuples.map { [unowned self] tuple in
                 self.createRent(rent: tuple.0.0, book: tuple.0.1, user: tuple.1)
@@ -51,7 +51,7 @@ final class UserController: BaseController {
     }
     
     func listWishes(_ req: Request) throws -> Future<Response> {
-        let future = try req.parameters.next(User.self).flatMap { user in
+        let futureWishes = try req.parameters.next(User.self).flatMap { user in
             return try user.wishes
                 .query(on: req)
                 .join(\Book.id, to: \Wish.bookID)
@@ -61,7 +61,7 @@ final class UserController: BaseController {
                 .all()
         }
         
-        return future.map { tuples in
+        return futureWishes.map { tuples in
             
             let data = tuples.map { [unowned self] tuple in
                 self.createWish(wish: tuple.0.0, book: tuple.0.1, user: tuple.1)
@@ -80,7 +80,7 @@ final class UserController: BaseController {
         let user = try req.parameters.next(User.self)
         let rentId = try req.parameters.next(Int.self)
         
-        let future = Rent.query(on: req)
+        let futureRents = Rent.query(on: req)
             .filter(\Rent.id == rentId)
             .join(\Book.id, to: \Rent.bookID)
             .join(\User.id, to: \Rent.userID)
@@ -88,7 +88,7 @@ final class UserController: BaseController {
             .alsoDecode(User.self)
             .first()
         
-        return future.map { [unowned self] tuple in
+        return futureRents.map { [unowned self] tuple in
             let data = self.createRent(rent: tuple!.0.0, book: tuple!.0.1, user: tuple!.1)
             return try self.createGetResponse(req, data: data)
         }
@@ -98,7 +98,7 @@ final class UserController: BaseController {
         let user = try req.parameters.next(User.self)
         let wishId = try req.parameters.next(Int.self)
         
-        let future = Wish.query(on: req)
+        let futureWishes = Wish.query(on: req)
             .filter(\Wish.id == wishId)
             .join(\Book.id, to: \Wish.bookID)
             .join(\User.id, to: \Wish.userID)
@@ -106,40 +106,40 @@ final class UserController: BaseController {
             .alsoDecode(User.self)
             .first()
         
-        return future.map { [unowned self] tuple in
+        return futureWishes.map { [unowned self] tuple in
             let data = self.createWish(wish: tuple!.0.0, book: tuple!.0.1, user: tuple!.1)
             return try self.createGetResponse(req, data: data)
         }
     }
     
     func create(_ req: Request) throws -> Future<Response> {
-        let future = try req.content.decode(User.self).flatMap { user in
+        let futurePost = try req.content.decode(User.self).flatMap { user in
             return user.save(on: req)
         }
         
-        return future.map { [unowned self] user in
+        return futurePost.map { [unowned self] user in
             let data = try self.encoder.encode(user)
             return self.createPostResponse(req, data: data)
         }
     }
     
     func createRent(_ req: Request) throws -> Future<Response> {
-        let future = try req.content.decode(Rent.self).flatMap { rent in
+        let futurePost = try req.content.decode(Rent.self).flatMap { rent in
             return rent.save(on: req)
         }
         
-        return future.map { [unowned self] rent in
+        return futurePost.map { [unowned self] rent in
             let data = try self.encoder.encode(rent)
             return self.createPostResponse(req, data: data)
         }
     }
     
     func createWish(_ req: Request) throws -> Future<Response> {
-        let future = try req.content.decode(Wish.self).flatMap { wish in
+        let futurePost = try req.content.decode(Wish.self).flatMap { wish in
             return wish.save(on: req)
         }
         
-        return future.map { [unowned self] wish in
+        return futurePost.map { [unowned self] wish in
             let data = try self.encoder.encode(wish)
             return self.createPostResponse(req, data: data)
         }
