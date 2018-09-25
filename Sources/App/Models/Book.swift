@@ -5,11 +5,11 @@ import Pagination
 final class Book: PostgreSQLModel {
     
     var id: Int?
-    var author: String
-    var title: String
-    var image: String?
-    var year: String
-    var genre: String
+    let author: String
+    let title: String
+    let image: String?
+    let year: String
+    let genre: String
     
     init(id: Int? = nil, author: String, title: String, image: String?, year: String, genre: String) {
         self.id = id
@@ -32,6 +32,25 @@ extension Book {
     
     var wishes: Children<Book, Wish> {
         return children(\.bookID)
+    }
+}
+
+extension Book: Mappable {
+    
+    func toDictionary() -> [String : Any] {
+        var dictionary: [String: Any] = [
+            "id": id,
+            "author": author,
+            "title": title,
+            "year": year,
+            "genre": genre
+        ]
+        
+        if image != nil {
+            dictionary["image"] = image
+        }
+        
+        return dictionary
     }
 }
 

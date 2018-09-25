@@ -26,6 +26,18 @@ extension Suggestion {
     
 }
 
+extension Suggestion: Mappable {
+    
+    func toDictionary() -> [String : Any] {
+        return [
+            "id": id,
+            "title": title,
+            "author": author,
+            "link": link
+        ]
+    }
+}
+
 extension Suggestion: Content {}
 extension Suggestion: Migration {}
 extension Suggestion: Parameter {}

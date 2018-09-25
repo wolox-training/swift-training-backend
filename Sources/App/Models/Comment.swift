@@ -29,6 +29,17 @@ extension Comment {
     
 }
 
+
+extension Comment: Mappable {
+    
+    func toDictionary() -> [String : Any] {
+        return [
+            "id": id,
+            "content": content
+        ]
+    }
+}
+
 extension Comment: Content {}
 extension Comment: Migration {}
 extension Comment: Parameter {}
