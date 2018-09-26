@@ -24,7 +24,7 @@ final class UserController: BaseController {
                 self.createComment(comment: tuple.0.0, book: tuple.0.1, user: tuple.1)
             }
             
-            return try self.createGetResponse(req, data: data)
+            return try self.createGetResponse(req, content: data)
         }
         
     }
@@ -46,7 +46,7 @@ final class UserController: BaseController {
                 self.createRent(rent: tuple.0.0, book: tuple.0.1, user: tuple.1)
             }
             
-            return try self.createGetResponse(req, data: data)
+            return try self.createGetResponse(req, content: data)
         }
     }
     
@@ -67,7 +67,7 @@ final class UserController: BaseController {
                 self.createWish(wish: tuple.0.0, book: tuple.0.1, user: tuple.1)
             }
             
-            return try self.createGetResponse(req, data: data)
+            return try self.createGetResponse(req, content: data)
         }
     }
     
@@ -90,7 +90,7 @@ final class UserController: BaseController {
         
         return futureRents.map { [unowned self] tuple in
             let data = self.createRent(rent: tuple!.0.0, book: tuple!.0.1, user: tuple!.1)
-            return try self.createGetResponse(req, data: data)
+            return try self.createGetResponse(req, content: data)
         }
     }
     
@@ -108,7 +108,7 @@ final class UserController: BaseController {
         
         return futureWishes.map { [unowned self] tuple in
             let data = self.createWish(wish: tuple!.0.0, book: tuple!.0.1, user: tuple!.1)
-            return try self.createGetResponse(req, data: data)
+            return try self.createGetResponse(req, content: data)
         }
     }
     
@@ -118,8 +118,7 @@ final class UserController: BaseController {
         }
         
         return futurePost.map { [unowned self] user in
-            let data = try self.encoder.encode(user)
-            return self.createPostResponse(req, data: data)
+            return try self.createPostResponse(req, content: user)
         }
     }
     
@@ -129,8 +128,7 @@ final class UserController: BaseController {
         }
         
         return futurePost.map { [unowned self] rent in
-            let data = try self.encoder.encode(rent)
-            return self.createPostResponse(req, data: data)
+            return try self.createPostResponse(req, content: rent)
         }
     }
     
@@ -140,8 +138,7 @@ final class UserController: BaseController {
         }
         
         return futurePost.map { [unowned self] wish in
-            let data = try self.encoder.encode(wish)
-            return self.createPostResponse(req, data: data)
+            return try self.createPostResponse(req, content: wish)
         }
     }
 }

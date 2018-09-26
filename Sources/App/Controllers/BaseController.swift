@@ -14,22 +14,25 @@ class BaseController {
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
     }
     
-    internal func createGetResponse(_ req: Request, data: Any) throws -> Response {
+    internal func createGetResponse(_ req: Request, content: Any) throws -> Response {
         let response = req.response()
         response.http.status = .ok
         response.http.headers.replaceOrAdd(name: .contentType, value: "application/json")
         
-        let json = try JSONSerialization.data(withJSONObject: data)
-        response.http.body = HTTPBody(data: json)
+        let data = try JSONSerialization.data(withJSONObject: content)
+        response.http.body = HTTPBody(data: data)
         
         return response
     }
     
-    internal func createPostResponse(_ req: Request, data: Data) -> Response {
+    internal func createPostResponse<T: Encodable>(_ req: Request, content: T) throws -> Response {
         let response = req.response()
         response.http.status = .created
         response.http.headers.replaceOrAdd(name: .contentType, value: "application/json")
+        
+        let data = try encoder.encode(content)
         response.http.body = HTTPBody(data: data)
+        
         return response
     }
     
