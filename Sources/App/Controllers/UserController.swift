@@ -121,7 +121,7 @@ final class UserController {
             return user.save(on: req)
         }
         
-        return futureUser.encode(status: HTTPStatus.created, for: req)
+        return futureUser.encode(status: .created, for: req)
     }
     
     func createRent(_ req: Request) throws -> Future<Response> {
@@ -129,7 +129,7 @@ final class UserController {
             return rent.save(on: req)
         }
         
-        return futureRent.encode(status: HTTPStatus.created, for: req)
+        return futureRent.encode(status: .created, for: req)
     }
     
     func createWish(_ req: Request) throws -> Future<Response> {
@@ -137,6 +137,6 @@ final class UserController {
             return wish.save(on: req)
         }
         
-        return futureWish.encode(status: HTTPStatus.created, for: req)
+        return futureWish.encode(status: .created, for: req)
     }
 }
