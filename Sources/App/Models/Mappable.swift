@@ -1,5 +1,5 @@
 protocol Mappable {
 
-    func toDictionary() -> [String:Any]
+    func toDictionary() -> [String: Any]
 
 }
