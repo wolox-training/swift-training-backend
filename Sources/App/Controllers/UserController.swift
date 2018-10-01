@@ -19,9 +19,9 @@ final class UserController {
                 .all()
         }
         
-        return futureComments.map { tuples in
-            return try tuples.map { tuple in
-                let (comment, book, user) = (tuple.0.0, tuple.0.1, tuple.1)
+        return futureComments.map { result in
+            return try result.map { entities in
+                let (comment, book, user) = (entities.0.0, entities.0.1, entities.1)
                 return try Comment.CommentForm(id: comment.requireID(), content: comment.content, user: user, book: book)
             }
         }
@@ -39,9 +39,9 @@ final class UserController {
                 .all()
         }
         
-        return futureRents.map { tuples in
-            return try tuples.map { tuple in
-                let (rent, book, user) = (tuple.0.0, tuple.0.1, tuple.1)
+        return futureRents.map { result in
+            return try result.map { entities in
+                let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
                 return try Rent.RentForm(id: rent.requireID(), user: user, book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
             }
         }
@@ -58,9 +58,9 @@ final class UserController {
                 .all()
         }
         
-        return futureWishes.map { tuples in
-            return try tuples.map { tuple in
-                let (wish, book, user) = (tuple.0.0, tuple.0.1, tuple.1)
+        return futureWishes.map { result in
+            return try result.map { entities in
+                let (wish, book, user) = (entities.0.0, entities.0.1, entities.1)
                 return try Wish.WishForm(id: wish.requireID(), user: user, book: book)
             }
         }
@@ -85,11 +85,11 @@ final class UserController {
         
         
         return futureRent.map { result in
-            guard let tuple = result else {
+            guard let entities = result else {
                 throw Abort(.notFound)
             }
             
-            let (rent, book, user) = (tuple.0.0, tuple.0.1, tuple.1)
+            let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
             return try Rent.RentForm(id: rent.requireID(), user: user, book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
         }
     }
@@ -107,11 +107,11 @@ final class UserController {
             .first()
         
         return futureWish.map { result in
-            guard let tuple = result else {
+            guard let entities = result else {
                 throw Abort(.notFound)
             }
             
-            let (rent, book, user) = (tuple.0.0, tuple.0.1, tuple.1)
+            let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
             return try Wish.WishForm(id: rent.requireID(), user: user, book: book)
         }
     }

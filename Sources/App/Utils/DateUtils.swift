@@ -8,11 +8,11 @@
 import Foundation
 
 class DateUtils {
-    static let Iso8601 = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+    static let YearMonthDay = "yyyy-MM-dd"
     
-    static func getIso8601Formatter() -> DateFormatter {
+    static func getFormatter() -> DateFormatter {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Iso8601
+        dateFormatter.dateFormat = YearMonthDay
         return dateFormatter
     }
 }
