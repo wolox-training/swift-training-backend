@@ -22,6 +22,7 @@ final class Book: PostgreSQLModel {
 }
 
 extension Book {
+    
     var comments: Children<Book, Comment> {
         return children(\.bookID)
     }
@@ -32,25 +33,6 @@ extension Book {
     
     var wishes: Children<Book, Wish> {
         return children(\.bookID)
-    }
-}
-
-extension Book: Mappable {
-    
-    func toDictionary() -> [String : Any] {
-        var dictionary: [String: Any] = [
-            "id": id,
-            "author": author,
-            "title": title,
-            "year": year,
-            "genre": genre
-        ]
-        
-        if image != nil {
-            dictionary["image"] = image
-        }
-        
-        return dictionary
     }
 }
 

@@ -14,7 +14,24 @@ final class Comment: PostgreSQLModel {
         self.userID = userID
         self.bookID = bookID
     }
-    
+}
+
+extension Comment {
+
+    struct CommentForm: Content {
+        
+        init(id: Int, content: String, user: User? = nil, book: Book? = nil) {
+            self.id = id
+            self.content = content
+            self.user = user
+            self.book = book
+        }
+        
+        var id: Int
+        var content: String
+        var user: User?
+        var book: Book?
+    }
 }
 
 extension Comment {
@@ -27,17 +44,6 @@ extension Comment {
         return parent(\.bookID)
     }
     
-}
-
-
-extension Comment: Mappable {
-    
-    func toDictionary() -> [String : Any] {
-        return [
-            "id": id,
-            "content": content
-        ]
-    }
 }
 
 extension Comment: Content {}

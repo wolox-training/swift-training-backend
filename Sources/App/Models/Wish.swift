@@ -16,20 +16,28 @@ final class Wish: PostgreSQLModel {
 
 extension Wish {
     
+    struct WishForm: Content {
+      
+        init(id: Int, user: User? = nil, book: Book? = nil) {
+            self.id = id
+            self.user = user
+            self.book = book
+        }
+        
+        var id: Int
+        var user: User?
+        var book: Book?
+    }
+}
+
+extension Wish {
+    
     var user: Parent<Wish, User> {
         return parent(\.userID)
     }
     
     var book: Parent<Wish, Book> {
         return parent(\.bookID)
-    }
-    
-}
-
-extension Wish: Mappable {
-    
-    func toDictionary() -> [String : Any] {
-        return ["id": id]
     }
 }
 

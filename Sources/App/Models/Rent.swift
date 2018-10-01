@@ -18,6 +18,19 @@ final class Rent: PostgreSQLModel {
         self.to = to
         self.returnedAt = returnedAt
     }
+    
+}
+
+extension Rent {
+
+    struct RentForm: Content {
+        var id: Int
+        var user: User
+        var book: Book
+        var from: Date
+        var to: Date
+        var returnedAt: Date?
+    }
 }
 
 extension Rent {
@@ -30,26 +43,6 @@ extension Rent {
         return parent(\.bookID)
     }
     
-}
-
-
-extension Rent: Mappable {
-    
-    func toDictionary() -> [String : Any] {
-        let formatter = DateUtils.getIso8601Formatter()
-        
-        var dictionary: [String: Any] = [
-            "id": id,
-            "from": formatter.string(from: from),
-            "to": formatter.string(from: to)
-        ]
-        
-        if returnedAt != nil {
-            dictionary["returnedAt"] = formatter.string(from: returnedAt!)
-        }
-        
-        return dictionary
-    }
 }
 
 extension Rent: Content {}

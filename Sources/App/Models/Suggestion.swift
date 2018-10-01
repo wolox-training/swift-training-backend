@@ -19,22 +19,21 @@ final class Suggestion: PostgreSQLModel {
 }
 
 extension Suggestion {
-    
-    var user: Parent<Suggestion, User> {
-        return parent(\.userID)
+
+    struct SuggestionForm: Content {
+        var id: Int
+        var title: String
+        var author: String
+        var link: String
+        var user: User
     }
     
 }
 
-extension Suggestion: Mappable {
+extension Suggestion {
     
-    func toDictionary() -> [String : Any] {
-        return [
-            "id": id,
-            "title": title,
-            "author": author,
-            "link": link
-        ]
+    var user: Parent<Suggestion, User> {
+        return parent(\.userID)
     }
 }
 

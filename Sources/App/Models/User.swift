@@ -33,17 +33,6 @@ extension User {
     }
 }
 
-extension User: Mappable {
-    
-    func toDictionary() -> [String : Any] {
-        return [
-            "id": id,
-            "username": username,
-            "password": password
-        ]
-    }
-}
-
 extension User: Content {}
 extension User: Migration {}
 extension User: Parameter {}

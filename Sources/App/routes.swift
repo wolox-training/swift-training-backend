@@ -4,6 +4,7 @@ public func routes(_ router: Router) throws {
 
     let userController = UserController()
     router.get("users", use: userController.list)
+    //router.get("users", use: userController.list)
     router.get("users", User.parameter, use: userController.show)
     router.post("users", use: userController.create)
     router.get("users", User.parameter, "rents", use: userController.listRents)
