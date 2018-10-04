@@ -8,8 +8,9 @@ final class UserController {
     }
     
     func listComments(_ req: Request) throws -> Future<[Comment.CommentForm]> {
+        let futureUser = try req.parameters.next(User.self)
         
-        let futureComments = try req.parameters.next(User.self).flatMap { user in
+        let futureComments = futureUser.flatMap { user in
             return try user.comments
                 .query(on: req)
                 .join(\Book.id, to: \Comment.bookID)
@@ -29,7 +30,9 @@ final class UserController {
     }
     
     func listRents(_ req: Request) throws -> Future<[Rent.RentForm]> {
-        let futureRents = try req.parameters.next(User.self).flatMap { user in
+        let futureUser = try req.parameters.next(User.self)
+        
+        let futureRents = futureUser.flatMap { user in
             return try user.rents
                 .query(on: req)
                 .join(\Book.id, to: \Rent.bookID)
@@ -48,7 +51,9 @@ final class UserController {
     }
     
     func listWishes(_ req: Request) throws -> Future<[Wish.WishForm]> {
-        let futureWishes = try req.parameters.next(User.self).flatMap { user in
+        let futureUser = try req.parameters.next(User.self)
+        
+        let futureWishes = futureUser.flatMap { user in
             return try user.wishes
                 .query(on: req)
                 .join(\Book.id, to: \Wish.bookID)
