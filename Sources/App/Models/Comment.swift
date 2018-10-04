@@ -17,16 +17,8 @@ final class Comment: PostgreSQLModel {
 }
 
 extension Comment {
-
+    
     struct CommentForm: Content {
-        
-        init(id: Int, content: String, user: User? = nil, book: Book? = nil) {
-            self.id = id
-            self.content = content
-            self.user = user
-            self.book = book
-        }
-        
         var id: Int
         var content: String
         var user: User?

@@ -17,13 +17,6 @@ final class Wish: PostgreSQLModel {
 extension Wish {
     
     struct WishForm: Content {
-      
-        init(id: Int, user: User? = nil, book: Book? = nil) {
-            self.id = id
-            self.user = user
-            self.book = book
-        }
-        
         var id: Int
         var user: User?
         var book: Book?
