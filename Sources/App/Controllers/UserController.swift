@@ -90,9 +90,7 @@ final class UserController {
         
         
         return futureRent.map { result in
-            guard let entities = result else {
-                throw Abort(.notFound)
-            }
+            guard let entities = result else { throw Abort(.notFound) }
             
             let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
             return try Rent.RentForm(id: rent.requireID(), user: user, book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
@@ -112,9 +110,7 @@ final class UserController {
             .first()
         
         return futureWish.map { result in
-            guard let entities = result else {
-                throw Abort(.notFound)
-            }
+            guard let entities = result else { throw Abort(.notFound) }
             
             let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
             return try Wish.WishForm(id: rent.requireID(), user: user, book: book)
