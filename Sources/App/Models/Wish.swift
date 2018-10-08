@@ -18,8 +18,8 @@ extension Wish {
     
     struct WishForm: Content {
         var id: Int
-        var user: User?
-        var book: Book?
+        var user: User
+        var book: Book
     }
 }
 
