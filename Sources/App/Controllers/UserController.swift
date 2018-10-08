@@ -77,17 +77,18 @@ final class UserController {
     
     
     func showRent(_ req: Request) throws -> Future<Rent.RentForm> {
-        let _ = try req.parameters.next(User.self)
+        let futureUser = try req.parameters.next(User.self)
         let rentId = try req.parameters.next(Int.self)
         
-        let futureRent = Rent.query(on: req)
-            .filter(\Rent.id == rentId)
-            .join(\Book.id, to: \Rent.bookID)
-            .join(\User.id, to: \Rent.userID)
-            .alsoDecode(Book.self)
-            .alsoDecode(User.self)
-            .first()
-        
+        let futureRent = futureUser.flatMap { user in
+            return try user.rents.query(on: req)
+                .filter(\Rent.id == rentId)
+                .join(\Book.id, to: \Rent.bookID)
+                .join(\User.id, to: \Rent.userID)
+                .alsoDecode(Book.self)
+                .alsoDecode(User.self)
+                .first()
+        }
         
         return futureRent.map { result in
             guard let entities = result else { throw Abort(.notFound) }
@@ -98,16 +99,19 @@ final class UserController {
     }
     
     func showWish(_ req: Request) throws -> Future<Wish.WishForm> {
-        let _ = try req.parameters.next(User.self)
+        let futureUser = try req.parameters.next(User.self)
         let wishId = try req.parameters.next(Int.self)
         
-        let futureWish = Wish.query(on: req)
-            .filter(\Wish.id == wishId)
-            .join(\Book.id, to: \Wish.bookID)
-            .join(\User.id, to: \Wish.userID)
-            .alsoDecode(Book.self)
-            .alsoDecode(User.self)
-            .first()
+        let futureWish = futureUser.flatMap { user in
+            return try user.wishes.query(on: req)
+                .filter(\Wish.id == wishId)
+                .join(\Book.id, to: \Wish.bookID)
+                .join(\User.id, to: \Wish.userID)
+                .alsoDecode(Book.self)
+                .alsoDecode(User.self)
+                .first()
+        }
+        
         
         return futureWish.map { result in
             guard let entities = result else { throw Abort(.notFound) }
