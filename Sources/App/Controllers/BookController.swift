@@ -4,11 +4,11 @@ import Pagination
 
 final class BookController {
     
-    func list(_ req: Request) throws -> Future<[Book]> {
+    func list(_ req: Request) throws -> Future<Response> {
         if req.hasPagination() {
-            return try paginatedList(req)
+            return try paginatedList(req).encode(for: req)
         } else {
-            return fullList(req)
+            return try fullList(req).encode(for: req)
         }
     }
     
@@ -17,10 +17,8 @@ final class BookController {
         return Book.query(on: req).all()
     }
     
-    private func paginatedList(_ req: Request) throws -> Future<[Book]> {
-        return try Book.query(on: req).paginate(for: req).map { paginated in
-            return paginated.data
-        }
+    private func paginatedList(_ req: Request) throws -> Future<Paginated<Book>> {
+        return try Book.query(on: req).paginate(for: req)
     }
     
     
@@ -84,7 +82,7 @@ final class BookController {
             guard let entities = result else { throw Abort(.notFound) }
             
             let (comment, book, user) = (entities.0.0, entities.0.1, entities.1)
-            return try Comment.CommentForm(id: comment.requireID(), content: comment.content, user: user, book: book)
+            return try Comment.CommentForm(id: commentId, content: comment.content, user: user, book: book)
         }
     }
     
