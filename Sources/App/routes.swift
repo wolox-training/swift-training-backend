@@ -18,8 +18,8 @@ public func routes(_ router: Router) throws {
     router.get("books", use: bookController.list)
     router.get("books", Book.parameter, use: bookController.show)
     router.post("books", use: bookController.create)
-    router.get("books", Book.parameter, "comments", Int.parameter, use: bookController.showComment)
     router.get("books", Book.parameter, "comments", use: bookController.listComments)
+    router.get("books", Book.parameter, "comments", Int.parameter, use: bookController.showComment)
     router.post("books", Book.parameter, "comments", use: bookController.createComment)
     router.get("books", Book.parameter, "suggestions", use: bookController.listSuggestedBooks)
 }
