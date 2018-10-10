@@ -13,4 +13,9 @@ public func routes(_ router: Router) throws {
     router.get("users", User.parameter, "wishes", Int.parameter, use: userController.showWish)
     router.post("users", User.parameter, "wishes", use: userController.createWish)
     router.get("users", User.parameter, "comments", use: userController.listComments)
+    
+    let suggestionController = SuggestionController()
+    router.get("suggestions", use: suggestionController.list)
+    router.get("suggestions", Suggestion.parameter, use: suggestionController.show)
+    router.post("suggestions", use: suggestionController.create)
 }
