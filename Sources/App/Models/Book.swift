@@ -22,6 +22,7 @@ final class Book: PostgreSQLModel {
 }
 
 extension Book {
+    
     var comments: Children<Book, Comment> {
         return children(\.bookID)
     }

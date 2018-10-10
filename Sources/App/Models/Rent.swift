@@ -22,6 +22,18 @@ final class Rent: PostgreSQLModel {
 }
 
 extension Rent {
+
+    struct RentForm: Content {
+        var id: Int
+        var user: User
+        var book: Book
+        var from: Date
+        var to: Date
+        var returnedAt: Date?
+    }
+}
+
+extension Rent {
     
     var user: Parent<Rent, User> {
         return parent(\.userID)
@@ -32,7 +44,6 @@ extension Rent {
     }
     
 }
-
 
 extension Rent: Content {}
 extension Rent: Migration {}

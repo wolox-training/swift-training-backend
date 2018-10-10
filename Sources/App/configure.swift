@@ -13,6 +13,13 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     let postgresqlConfig = getDatabaseConfig(env)
     services.register(postgresqlConfig)
     
+    var contentConfig = ContentConfig.default()
+    let jsonEncoder = createJsonEncoder()
+    let jsonDecoder = createJsonDecoder()
+    contentConfig.use(encoder: jsonEncoder, for: .json)
+    contentConfig.use(decoder: jsonDecoder, for: .json)
+    services.register(contentConfig)
+    
     var migrations = MigrationConfig()
     migrations.add(model: Book.self, database: .psql)
     migrations.add(model: User.self, database: .psql)
@@ -37,4 +44,19 @@ private func getDatabaseConfig(_ env: Environment) -> PostgreSQLDatabaseConfig {
             password: nil
         )
     }
+}
+
+
+private func createJsonEncoder() -> JSONEncoder {
+    let jsonEncoder = JSONEncoder()
+    let dateFormatter = DateUtils.getFormatter()
+    jsonEncoder.dateEncodingStrategy = .formatted(dateFormatter)
+    return jsonEncoder
+}
+
+private func createJsonDecoder() -> JSONDecoder {
+    let jsonDecoder = JSONDecoder()
+    let dateFormatter = DateUtils.getFormatter()
+    jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+    return jsonDecoder
 }

@@ -19,11 +19,22 @@ final class Suggestion: PostgreSQLModel {
 }
 
 extension Suggestion {
+
+    struct SuggestionForm: Content {
+        var id: Int
+        var title: String
+        var author: String
+        var link: String
+        var user: User
+    }
+    
+}
+
+extension Suggestion {
     
     var user: Parent<Suggestion, User> {
         return parent(\.userID)
     }
-    
 }
 
 extension Suggestion: Content {}

@@ -16,6 +16,15 @@ final class Wish: PostgreSQLModel {
 
 extension Wish {
     
+    struct WishForm: Content {
+        var id: Int
+        var user: User
+        var book: Book
+    }
+}
+
+extension Wish {
+    
     var user: Parent<Wish, User> {
         return parent(\.userID)
     }
@@ -23,9 +32,7 @@ extension Wish {
     var book: Parent<Wish, Book> {
         return parent(\.bookID)
     }
-    
 }
-
 
 extension Wish: Content {}
 extension Wish: Migration {}
