@@ -63,29 +63,37 @@ final class BookController {
         return try req.parameters.next(Book.self)
     }
     
-    
+
     func showComment(_ req: Request) throws -> Future<Comment.CommentForm> {
         let futureBook = try req.parameters.next(Book.self)
-        let commentId = try req.parameters.next(Int.self)
+        let futureComment = try req.parameters.next(Comment.self)
         
-        let futureComment = futureBook.flatMap { book in
-            return try book.comments.query(on: req)
-                .filter(\Comment.id == commentId)
-                .join(\Book.id, to: \Comment.bookID)
-                .join(\User.id, to: \Comment.userID)
-                .alsoDecode(Book.self)
-                .alsoDecode(User.self)
-                .first()
+        let promise = req.eventLoop.newPromise(Comment.CommentForm.self)
+        
+        DispatchQueue.global(qos: .default).async {
+            do {
+                let comment = try futureComment.wait()
+                let userCall = comment.user.get(on: req)
+                let bookCall = comment.book.get(on: req)
+                let user = try userCall.wait()
+                let book = try bookCall.wait()
+                
+                let bookToCompare = try futureBook.wait()
+                if book.id != bookToCompare.id { throw Abort(.notFound) }
+                
+                let commentForm = try Comment.CommentForm(id: comment.requireID(),
+                                                          content: comment.content,
+                                                          user: user,
+                                                          book: book)
+                promise.succeed(result: commentForm)
+            }
+            catch {
+                promise.fail(error: error)
+            }
         }
         
-        return futureComment.map { result in
-            guard let entities = result else { throw Abort(.notFound) }
-            
-            let (comment, book, user) = (entities.0.0, entities.0.1, entities.1)
-            return try Comment.CommentForm(id: commentId, content: comment.content, user: user, book: book)
-        }
+        return promise.futureResult
     }
-    
     
     func create(_ req: Request) throws -> Future<Response> {
         let futureBook = try req.content.decode(Book.self).flatMap { book in
