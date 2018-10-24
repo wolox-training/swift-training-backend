@@ -136,7 +136,7 @@ do
 	for user_id in {1..3}
 	do
 		curl \
-		-d  "{\"content\": \"$COMMENT_EXAMPLE\", \"userID\": $user_id, \"bookID\": $book_id }" \
+		-d  '{"content": '"\"$COMMENT_EXAMPLE\""', "userID": '$user_id', "bookID": '$book_id' }' \
 		-H "Content-Type: application/json" \
 		-X POST \
 		"$BASE_URL/books/$book_id/comments"
@@ -156,7 +156,7 @@ readonly RENTS_URL="/users/$RENT_USER/rents"
 for book_id in {1..2}
 do
 	curl \
-	-d  "{\"userID\": $RENT_USER, \"bookID\": $book_id, \"from\": \"2018-09-17\", \"to\": \"2018-09-24\"}" \
+	-d  '{"userID": '$RENT_USER', "bookID": '$book_id', "from": "2018-09-17", "to": "2018-09-24"}' \
 	-H "Content-Type: application/json" \
 	-X POST \
 	"$BASE_URL$RENTS_URL"
@@ -175,7 +175,7 @@ readonly WISHES_URL="/users/$WISH_USER/wishes"
 for book_id in {3..4}
 do
 	curl \
-	-d  "{\"userID\": $WISH_USER, \"bookID\": $book_id}" \
+	-d  '{"userID": '$WISH_USER', "bookID": '$book_id'}' \
 	-H "Content-Type: application/json" \
 	-X POST \
 	"$BASE_URL$WISHES_URL"
