@@ -14,6 +14,15 @@ public func routes(_ router: Router) throws {
     router.post("users", User.parameter, "wishes", use: userController.createWish)
     router.get("users", User.parameter, "comments", use: userController.listComments)
     
+    let bookController = BookController()
+    router.get("books", use: bookController.list)
+    router.get("books", Book.parameter, use: bookController.show)
+    router.post("books", use: bookController.create)
+    router.get("books", Book.parameter, "comments", use: bookController.listComments)
+    router.get("books", Book.parameter, "comments", Comment.parameter, use: bookController.showComment)
+    router.post("books", Book.parameter, "comments", use: bookController.createComment)
+    router.get("books", Book.parameter, "suggestions", use: bookController.listSuggestedBooks)
+
     let suggestionController = SuggestionController()
     router.get("suggestions", use: suggestionController.list)
     router.get("suggestions", Suggestion.parameter, use: suggestionController.show)
