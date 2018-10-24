@@ -58,7 +58,7 @@ declare -a book_list=(
 		"author": "Dani",
 		"title": "La Gran Dani",
 		"image": "",
-        "year": "1992",
+    "year": "1992",
 		"genre": "fiction"
 	}'
 	'{
