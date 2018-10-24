@@ -22,4 +22,9 @@ public func routes(_ router: Router) throws {
     router.get("books", Book.parameter, "comments", Comment.parameter, use: bookController.showComment)
     router.post("books", Book.parameter, "comments", use: bookController.createComment)
     router.get("books", Book.parameter, "suggestions", use: bookController.listSuggestedBooks)
+
+    let suggestionController = SuggestionController()
+    router.get("suggestions", use: suggestionController.list)
+    router.get("suggestions", Suggestion.parameter, use: suggestionController.show)
+    router.post("suggestions", use: suggestionController.create)
 }
