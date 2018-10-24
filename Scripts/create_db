@@ -27,13 +27,13 @@ declare -a book_list=(
 		"year": "1985",
 		"genre": "suspense"
 	}'
-	"{
-		\"author\": \"Kyle Simpson\",
-		\"title\": \"You Don't Know JS: Async & Performance\",
-		\"image\": \"http://wolox-training.s3.amazonaws.com/uploads/cover.jpg\",
-		\"year\": \"2014\",
-		\"genre\": \"programming\"
-	}"
+	'{
+		"author": "Kyle Simpson",
+		"title": "You Don'"'"'t Know JS: Async & Performance",
+		"image": "http://wolox-training.s3.amazonaws.com/uploads/cover.jpg",
+		"year": "2014",
+		"genre": "programming"
+	}'
 	'{
 		"author": "Christopher Pike",
 		"title": "Scavenger Hunt",
