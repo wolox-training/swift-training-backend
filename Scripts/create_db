@@ -57,7 +57,8 @@ declare -a book_list=(
 	'{
 		"author": "Dani",
 		"title": "La Gran Dani",
-		"image": "", "year": "1992",
+		"image": "",
+        "year": "1992",
 		"genre": "fiction"
 	}'
 	'{
@@ -87,10 +88,10 @@ echo "Creating Users...\n"
 readonly USERS_URI="/users"
 
 declare -a user_list=(
-    '{
-        "username": "admin",
-        "password": "admin"
-    }'
+	'{
+		"username": "admin",
+		"password": "admin"
+	}'
 	'{
 		"username": "juanrodriguez",
 		"password": "juanrodriguez"
