@@ -78,47 +78,67 @@ final class UserController {
     
     func showRent(_ req: Request) throws -> Future<Rent.RentForm> {
         let futureUser = try req.parameters.next(User.self)
-        let rentId = try req.parameters.next(Int.self)
+        let futureRent = try req.parameters.next(Rent.self)
         
-        let futureRent = futureUser.flatMap { user in
-            return try user.rents.query(on: req)
-                .filter(\Rent.id == rentId)
-                .join(\Book.id, to: \Rent.bookID)
-                .join(\User.id, to: \Rent.userID)
-                .alsoDecode(Book.self)
-                .alsoDecode(User.self)
-                .first()
+        let promise = req.eventLoop.newPromise(Rent.RentForm.self)
+        
+        DispatchQueue.global(qos: .default).async {
+            do {
+                let rent = try futureRent.wait()
+                let userCall = rent.user.get(on: req)
+                let bookCall = rent.book.get(on: req)
+                let user = try userCall.wait()
+                let book = try bookCall.wait()
+                
+                let userToCompare = try futureUser.wait()
+                if user.id != userToCompare.id { throw Abort(.notFound) }
+                
+                let rentForm = try Rent.RentForm(id: rent.requireID(),
+                                                 user: user,
+                                                 book: book,
+                                                 from: rent.from,
+                                                 to: rent.to,
+                                                 returnedAt: rent.returnedAt)
+                
+                promise.succeed(result: rentForm)
+            }
+            catch {
+                promise.fail(error: error)
+            }
         }
         
-        return futureRent.map { result in
-            guard let entities = result else { throw Abort(.notFound) }
-            
-            let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
-            return try Rent.RentForm(id: rent.requireID(), user: user, book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
-        }
+        return promise.futureResult
     }
     
     func showWish(_ req: Request) throws -> Future<Wish.WishForm> {
         let futureUser = try req.parameters.next(User.self)
-        let wishId = try req.parameters.next(Int.self)
+        let futureWish = try req.parameters.next(Wish.self)
         
-        let futureWish = futureUser.flatMap { user in
-            return try user.wishes.query(on: req)
-                .filter(\Wish.id == wishId)
-                .join(\Book.id, to: \Wish.bookID)
-                .join(\User.id, to: \Wish.userID)
-                .alsoDecode(Book.self)
-                .alsoDecode(User.self)
-                .first()
+        let promise = req.eventLoop.newPromise(Wish.WishForm.self)
+        
+        DispatchQueue.global(qos: .default).async {
+            do {
+                let wish = try futureWish.wait()
+                let userCall = wish.user.get(on: req)
+                let bookCall = wish.book.get(on: req)
+                let user = try userCall.wait()
+                let book = try bookCall.wait()
+                
+                let userToCompare = try futureUser.wait()
+                if user.id != userToCompare.id { throw Abort(.notFound) }
+                
+                let wishForm = try Wish.WishForm(id: wish.requireID(),
+                                                 user: user,
+                                                 book: book)
+                
+                promise.succeed(result: wishForm)
+            }
+            catch {
+                promise.fail(error: error)
+            }
         }
         
-        
-        return futureWish.map { result in
-            guard let entities = result else { throw Abort(.notFound) }
-            
-            let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
-            return try Wish.WishForm(id: rent.requireID(), user: user, book: book)
-        }
+        return promise.futureResult
     }
     
     func create(_ req: Request) throws -> Future<Response> {

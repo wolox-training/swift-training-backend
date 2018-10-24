@@ -7,10 +7,10 @@ public func routes(_ router: Router) throws {
     router.get("users", User.parameter, use: userController.show)
     router.post("users", use: userController.create)
     router.get("users", User.parameter, "rents", use: userController.listRents)
-    router.get("users", User.parameter, "rents", Int.parameter, use: userController.showRent)
+    router.get("users", User.parameter, "rents", Rent.parameter, use: userController.showRent)
     router.post("users", User.parameter, "rents", use: userController.createRent)
     router.get("users", User.parameter, "wishes", use: userController.listWishes)
-    router.get("users", User.parameter, "wishes", Int.parameter, use: userController.showWish)
+    router.get("users", User.parameter, "wishes", Wish.parameter, use: userController.showWish)
     router.post("users", User.parameter, "wishes", use: userController.createWish)
     router.get("users", User.parameter, "comments", use: userController.listComments)
     
