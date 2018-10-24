@@ -25,7 +25,7 @@ curl https://powerful-waters-21107.herokuapp.com/books
 
 ## DER
 
-![alt text](https://github.com/wolox-training/swift-training-backend/blob/readme/DER.png)
+![alt text](https://github.com/wolox-training/swift-training-backend/blob/master/DER.png)
 <br/>
 
 ## Running locally
