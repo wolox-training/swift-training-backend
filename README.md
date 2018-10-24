@@ -68,7 +68,6 @@ sh Scripts/create_db
 <br/>
 
 All done! You're ready to start using the API :)
-
 <br/>
 
 ## Issues with Xcode?
