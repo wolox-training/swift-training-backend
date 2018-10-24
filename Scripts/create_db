@@ -33,7 +33,7 @@ declare -a book_list=(
 		"image": "http://wolox-training.s3.amazonaws.com/uploads/cover.jpg",
 		"year": "2014",
 		"genre": "programming"
-	}'
+	}' # The single quote in the title ("don't") couldn't be escaped with "\" so it has to be written like above
 	'{
 		"author": "Christopher Pike",
 		"title": "Scavenger Hunt",
