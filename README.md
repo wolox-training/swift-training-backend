@@ -65,3 +65,17 @@ swift run
 ```
 sh Scripts/create_db
 ```
+<br/>
+
+All done! You're ready to start using the API :)
+
+<br/>
+
+## Issues with Xcode?
+
+If Xcode doesn't show the correct files, or the project structure seems wrong, just run the following command:
+```
+vapor update -y
+```
+This will update dependencies and create the appropiate Xcode project files. Xcode will restart after the command executes.
+
