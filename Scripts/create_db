@@ -88,8 +88,8 @@ readonly USERS_URI="/users"
 
 declare -a user_list=(
     '{
-    "username": "admin",
-    "password": "admin"
+        "username": "admin",
+        "password": "admin"
     }'
 	'{
 		"username": "juanrodriguez",
@@ -128,7 +128,7 @@ echo "Done!\n\n"
 
 
 echo "Creating Comments...\n"
-readonly COMMENT_EXAMPLE="Comment example jkdfhgkjsdhfkg"
+readonly COMMENT_EXAMPLE="I recommend this book! It's really interesting."
 
 for book_id in {1..5}
 do
