@@ -25,7 +25,7 @@ curl https://powerful-waters-21107.herokuapp.com/books
 
 ## DER
 
-![alt text](https://raw.githubusercontent.com/gmazzei/WBooksBackend/master/DER.png)
+![alt text](https://github.com/wolox-training/swift-training-backend/blob/readme/DER.png)
 <br/>
 
 ## Running locally
@@ -68,6 +68,7 @@ sh Scripts/create_db
 <br/>
 
 All done! You're ready to start using the API :)
+
 <br/>
 
 ## Issues with Xcode?
