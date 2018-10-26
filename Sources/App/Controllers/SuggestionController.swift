@@ -26,10 +26,10 @@ final class SuggestionController {
         return futureSuggestion.flatMap { suggestion in
             return suggestion.user.get(on: req).map { user in
                 return try Suggestion.SuggestionForm(id: suggestion.requireID(),
-                                                            title: suggestion.title,
-                                                            author: suggestion.author,
-                                                            link: suggestion.link,
-                                                            user: user)
+                                                     title: suggestion.title,
+                                                     author: suggestion.author,
+                                                     link: suggestion.link,
+                                                     user: user)
             }
         }
     }
