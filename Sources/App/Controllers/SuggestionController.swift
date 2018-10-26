@@ -23,27 +23,15 @@ final class SuggestionController {
     func show(_ req: Request) throws -> Future<Suggestion.SuggestionForm> {
         let futureSuggestion = try req.parameters.next(Suggestion.self)
         
-        let promise = req.eventLoop.newPromise(Suggestion.SuggestionForm.self)
-        
-        DispatchQueue.global(qos: .default).async {
-            do {
-                let suggestion = try futureSuggestion.wait()
-                let userCall = suggestion.user.get(on: req)
-                let user = try userCall.wait()
-                
-                let suggestionForm = try Suggestion.SuggestionForm(id: suggestion.requireID(),
-                                                                   title: suggestion.title,
-                                                                   author: suggestion.author,
-                                                                   link: suggestion.link,
-                                                                   user: user)
-                promise.succeed(result: suggestionForm)
-            }
-            catch {
-                promise.fail(error: error)
+        return futureSuggestion.flatMap { suggestion in
+            return suggestion.user.get(on: req).map { user in
+                return try Suggestion.SuggestionForm(id: suggestion.requireID(),
+                                                            title: suggestion.title,
+                                                            author: suggestion.author,
+                                                            link: suggestion.link,
+                                                            user: user)
             }
         }
-        
-        return promise.futureResult
     }
     
     func create(_ req: Request) throws -> Future<Response> {
