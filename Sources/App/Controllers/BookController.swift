@@ -75,12 +75,12 @@ final class BookController {
                 let comment = try futureComment.wait()
                 let userCall = comment.user.get(on: req)
                 let bookCall = comment.book.get(on: req)
-                let user = try userCall.wait()
-                let book = try bookCall.wait()
                 
                 let bookToCompare = try futureBook.wait()
+                let book = try bookCall.wait()
                 if book.id != bookToCompare.id { throw Abort(.notFound) }
                 
+                let user = try userCall.wait()
                 let commentForm = try Comment.CommentForm(id: comment.requireID(),
                                                           content: comment.content,
                                                           user: user,

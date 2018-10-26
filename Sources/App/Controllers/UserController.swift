@@ -87,12 +87,12 @@ final class UserController {
                 let rent = try futureRent.wait()
                 let userCall = rent.user.get(on: req)
                 let bookCall = rent.book.get(on: req)
-                let user = try userCall.wait()
-                let book = try bookCall.wait()
                 
                 let userToCompare = try futureUser.wait()
+                let user = try userCall.wait()
                 if user.id != userToCompare.id { throw Abort(.notFound) }
                 
+                let book = try bookCall.wait()
                 let rentForm = try Rent.RentForm(id: rent.requireID(),
                                                  user: user,
                                                  book: book,
@@ -121,12 +121,12 @@ final class UserController {
                 let wish = try futureWish.wait()
                 let userCall = wish.user.get(on: req)
                 let bookCall = wish.book.get(on: req)
-                let user = try userCall.wait()
-                let book = try bookCall.wait()
                 
                 let userToCompare = try futureUser.wait()
+                let user = try userCall.wait()
                 if user.id != userToCompare.id { throw Abort(.notFound) }
                 
+                let book = try bookCall.wait()
                 let wishForm = try Wish.WishForm(id: wish.requireID(),
                                                  user: user,
                                                  book: book)
