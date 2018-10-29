@@ -13,12 +13,12 @@ Backend for WBooks iOS Training, made entirely in Swift.
 ## API
 The app is now running on Heroku. You can interact with it through this URL: <br/>
 ```
-https://powerful-waters-21107.herokuapp.com/
+https://swift-training-backend.herokuapp.com/
 ```
 
 ### Example
 ```
-curl https://powerful-waters-21107.herokuapp.com/books
+curl https://swift-training-backend.herokuapp.com/books
 ```
 <br/>
 
