@@ -71,6 +71,48 @@ All done! You're ready to start using the API :)
 
 <br/>
 
+## Deploying to Heroku
+
+1) Install Heroku CLI:
+```
+brew install heroku/brew/heroku
+```
+<br/>
+
+2) Log in to Heroku:
+```
+heroku login
+```
+<br/>
+
+3) Ask your Team Leader to be added as a Collaborator. This will give you the proper permissions to push to the Heroku repository.
+<br/>
+
+4) After you have been added as a Collaborator, add the remote repository:
+```
+heroku git:remote -a swift-training-backend
+```
+<br/>
+
+5) Well done! We are ready to deploy. In order to do this, run the following command:
+```
+vapor heroku push
+```
+<br/>
+
+It might take a while, but in the meantime you can check out the build log from the [Dashboard](https://dashboard.heroku.com/apps/swift-training-backend/activity).
+
+<br/>
+
+## Logs
+
+You can see the remote logs with the following command:
+```
+heroku logs --tail
+```
+
+<br/>
+
 ## Issues with Xcode?
 
 If Xcode doesn't show the correct files, or the project structure seems wrong, just run the following command:
