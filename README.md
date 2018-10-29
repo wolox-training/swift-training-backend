@@ -94,7 +94,7 @@ heroku git:remote -a swift-training-backend
 ```
 <br/>
 
-5) Well done! We are ready to deploy. In order to do so, run the following command:
+5) Well done! You are ready to deploy. In order to do so, run the following command:
 ```
 vapor heroku push
 ```
