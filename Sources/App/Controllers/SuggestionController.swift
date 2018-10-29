@@ -23,21 +23,14 @@ final class SuggestionController {
     func show(_ req: Request) throws -> Future<Suggestion.SuggestionForm> {
         let futureSuggestion = try req.parameters.next(Suggestion.self)
         
-        let futureSuggestionAndUser = futureSuggestion.flatMap { suggestion in
-            return Suggestion.query(on: req)
-                .filter(\Suggestion.id == suggestion.id)
-                .join(\User.id, to: \Suggestion.userID)
-                .alsoDecode(User.self)
-                .first()
-                .unwrap(or: Abort(.notFound))
-        }
-        
-        return futureSuggestionAndUser.map { (suggestion, user) in
-            return try Suggestion.SuggestionForm(id: suggestion.requireID(),
-                                                 title: suggestion.title,
-                                                 author: suggestion.author,
-                                                 link: suggestion.link,
-                                                 user: user)
+        return futureSuggestion.flatMap { suggestion in
+            return suggestion.user.get(on: req).map { user in
+                return try Suggestion.SuggestionForm(id: suggestion.requireID(),
+                                                     title: suggestion.title,
+                                                     author: suggestion.author,
+                                                     link: suggestion.link,
+                                                     user: user)
+            }
         }
     }
     
