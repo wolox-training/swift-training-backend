@@ -100,7 +100,7 @@ vapor heroku push
 ```
 <br/>
 
-It might take a while, but in the meantime you can check out the build log from the [Dashboard](https://dashboard.heroku.com/apps/swift-training-backend/activity).
+It might take a while, but in the meantime you can check out the build logs from the [Dashboard](https://dashboard.heroku.com/apps/swift-training-backend/activity).
 
 <br/>
 
