@@ -3,6 +3,9 @@ import FluentPostgreSQL
 
 final class UserController {
     
+    /// Obtains the complete list of users
+    ///
+    /// - Parameter req: current request
     func list(_ req: Request) throws -> Future<[User]> {
         return User.query(on: req).all()
     }
@@ -29,6 +32,9 @@ final class UserController {
  
     }
     
+    /// Obtains the rents from a user
+    ///
+    /// - Parameter req: current request
     func listRents(_ req: Request) throws -> Future<[Rent.RentForm]> {
         let futureUser = try req.parameters.next(User.self)
         
@@ -50,6 +56,9 @@ final class UserController {
         }
     }
     
+    /// Obtains the wishes from a user
+    ///
+    /// - Parameter req: current request
     func listWishes(_ req: Request) throws -> Future<[Wish.WishForm]> {
         let futureUser = try req.parameters.next(User.self)
         
@@ -71,11 +80,16 @@ final class UserController {
         }
     }
     
+    /// Obtains a specific user
+    ///
+    /// - Parameter req: current request
     func show(_ req: Request) throws -> Future<User> {
         return try req.parameters.next(User.self)
     }
     
-    
+    /// Obtains a specific rent from a user
+    ///
+    /// - Parameter req: current request
     func showRent(_ req: Request) throws -> Future<Rent.RentForm> {
         let futureUser = try req.parameters.next(User.self)
         let futureRent = try req.parameters.next(Rent.self)
@@ -110,6 +124,9 @@ final class UserController {
         return promise.futureResult
     }
     
+    /// Obtains a specific wish from a user
+    ///
+    /// - Parameter req: current request
     func showWish(_ req: Request) throws -> Future<Wish.WishForm> {
         let futureUser = try req.parameters.next(User.self)
         let futureWish = try req.parameters.next(Wish.self)
@@ -141,6 +158,9 @@ final class UserController {
         return promise.futureResult
     }
     
+    /// Creates a new user
+    ///
+    /// - Parameter req: current request
     func create(_ req: Request) throws -> Future<Response> {
         let futureUser = try req.content.decode(User.self).flatMap { user in
             return user.save(on: req)
@@ -149,6 +169,9 @@ final class UserController {
         return futureUser.encode(status: .created, for: req)
     }
     
+    /// Creates a new rent
+    ///
+    /// - Parameter req: current request
     func createRent(_ req: Request) throws -> Future<Response> {
         let futureRent = try req.content.decode(Rent.self).flatMap { rent in
             return rent.save(on: req)
@@ -157,6 +180,9 @@ final class UserController {
         return futureRent.encode(status: .created, for: req)
     }
     
+    /// Creates a new wish
+    ///
+    /// - Parameter req: current request
     func createWish(_ req: Request) throws -> Future<Response> {
         let futureWish = try req.content.decode(Wish.self).flatMap { wish in
             return wish.save(on: req)

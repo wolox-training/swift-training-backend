@@ -30,7 +30,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(migrations)
 }
 
-
+/// Creates the database configuration
+///
+/// - Parameter env: current environment (production, development or testing)
 private func getDatabaseConfig(_ env: Environment) -> PostgreSQLDatabaseConfig {
     if env.isRelease {
         let databaseUrl = ProcessInfo.processInfo.environment["DATABASE_URL"]!
@@ -46,7 +48,7 @@ private func getDatabaseConfig(_ env: Environment) -> PostgreSQLDatabaseConfig {
     }
 }
 
-
+/// Creates a JSON encoder that uses "yyyy-MM-dd" format for dates
 private func createJsonEncoder() -> JSONEncoder {
     let jsonEncoder = JSONEncoder()
     let dateFormatter = DateUtils.getFormatter()
@@ -54,6 +56,7 @@ private func createJsonEncoder() -> JSONEncoder {
     return jsonEncoder
 }
 
+/// Creates a JSON decoder that uses "yyyy-MM-dd" format for dates
 private func createJsonDecoder() -> JSONDecoder {
     let jsonDecoder = JSONDecoder()
     let dateFormatter = DateUtils.getFormatter()

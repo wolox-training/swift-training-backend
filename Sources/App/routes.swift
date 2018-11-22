@@ -1,5 +1,6 @@
 import Vapor
 
+/// Sets up the router by linking each path to a controller method
 public func routes(_ router: Router) throws {
 
     let userController = UserController()

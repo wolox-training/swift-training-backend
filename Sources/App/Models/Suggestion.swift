@@ -18,6 +18,7 @@ final class Suggestion: PostgreSQLModel {
     }
 }
 
+// Form used to map the suggestion JSON response
 extension Suggestion {
 
     struct SuggestionForm: Content {
@@ -30,6 +31,7 @@ extension Suggestion {
     
 }
 
+// Database relationships
 extension Suggestion {
     
     var user: Parent<Suggestion, User> {

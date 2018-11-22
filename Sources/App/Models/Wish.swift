@@ -14,6 +14,7 @@ final class Wish: PostgreSQLModel {
     }
 }
 
+// Form used to map the wish JSON response
 extension Wish {
     
     struct WishForm: Content {
@@ -23,6 +24,7 @@ extension Wish {
     }
 }
 
+// Database relationships
 extension Wish {
     
     var user: Parent<Wish, User> {

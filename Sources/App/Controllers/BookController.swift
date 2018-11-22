@@ -4,6 +4,9 @@ import Pagination
 
 final class BookController {
     
+    /// Obtains the complete list of books
+    ///
+    /// - Parameter req: current request
     func list(_ req: Request) throws -> Future<Response> {
         if req.hasPagination() {
             return try paginatedList(req).encode(for: req)
@@ -13,15 +16,23 @@ final class BookController {
     }
     
     
+    /// Obtains the complete list of books without pagination
+    ///
+    /// - Parameter req: current request
     private func fullList(_ req: Request) -> Future<[Book]> {
         return Book.query(on: req).all()
     }
     
+    /// Obtains the requested page from the list of books
+    ///
+    /// - Parameter req: current request
     private func paginatedList(_ req: Request) throws -> Future<Paginated<Book>> {
         return try Book.query(on: req).paginate(for: req)
     }
     
-    
+    /// Obtains the comments from a book
+    ///
+    /// - Parameter req: current request
     func listComments(_ req: Request) throws -> Future<[Comment.CommentForm]> {
         let futureBook = try req.parameters.next(Book.self)
         
@@ -45,6 +56,9 @@ final class BookController {
     }
     
     
+    /// Obtains the book's suggestions from another book
+    ///
+    /// - Parameter req: current request
     func listSuggestedBooks(_ req: Request) throws -> Future<[Book]> {
         let futureBook = try req.parameters.next(Book.self)
         
@@ -59,11 +73,17 @@ final class BookController {
     }
     
     
+    /// Obtains a specific book
+    ///
+    /// - Parameter req: current request
     func show(_ req: Request) throws -> Future<Book> {
         return try req.parameters.next(Book.self)
     }
     
-
+    
+    /// Obtains a specific comment from a book
+    ///
+    /// - Parameter req: current request
     func showComment(_ req: Request) throws -> Future<Comment.CommentForm> {
         let futureBook = try req.parameters.next(Book.self)
         let futureComment = try req.parameters.next(Comment.self)
@@ -95,6 +115,9 @@ final class BookController {
         return promise.futureResult
     }
     
+    /// Creates a new book
+    ///
+    /// - Parameter req: current request
     func create(_ req: Request) throws -> Future<Response> {
         let futureBook = try req.content.decode(Book.self).flatMap { book in
             return book.save(on: req)
@@ -104,6 +127,9 @@ final class BookController {
     }
     
     
+    /// Creates a comment
+    ///
+    /// - Parameter req: current request
     func createComment(_ req: Request) throws -> Future<Response> {
         let futureComment = try req.content.decode(Comment.self).flatMap { comment in
             return comment.save(on: req)

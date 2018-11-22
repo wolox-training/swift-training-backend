@@ -8,6 +8,7 @@
 import Vapor
 import Pagination
 
+/// Checks if the request parameters include pagination options
 extension Request {
     
     func hasPagination() -> Bool {

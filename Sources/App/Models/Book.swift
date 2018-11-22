@@ -21,6 +21,7 @@ final class Book: PostgreSQLModel {
     }
 }
 
+// Database relationships
 extension Book {
     
     var comments: Children<Book, Comment> {
