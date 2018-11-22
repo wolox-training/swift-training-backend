@@ -18,7 +18,7 @@ final class Suggestion: PostgreSQLModel {
     }
 }
 
-// Form used for mapping the suggestion JSON response
+// Struct used for mapping the suggestion JSON response
 extension Suggestion {
 
     struct SuggestionForm: Content {

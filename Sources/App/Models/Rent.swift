@@ -21,7 +21,7 @@ final class Rent: PostgreSQLModel {
     
 }
 
-// Form used for mapping the rent JSON response
+// Struct used for mapping the rent JSON response
 extension Rent {
 
     struct RentForm: Content {

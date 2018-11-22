@@ -14,7 +14,7 @@ final class Wish: PostgreSQLModel {
     }
 }
 
-// Form used for mapping the wish JSON response
+// Struct used for mapping the wish JSON response
 extension Wish {
     
     struct WishForm: Content {
