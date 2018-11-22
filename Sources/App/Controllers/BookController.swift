@@ -80,7 +80,6 @@ final class BookController {
         return try req.parameters.next(Book.self)
     }
     
-    
     /// Obtains a specific comment from a book
     ///
     /// - Parameter req: current request
