@@ -21,6 +21,7 @@ final class Rent: PostgreSQLModel {
     
 }
 
+// Struct used for mapping the rent JSON response
 extension Rent {
 
     struct RentForm: Content {
@@ -33,6 +34,7 @@ extension Rent {
     }
 }
 
+// Database relationships
 extension Rent {
     
     var user: Parent<Rent, User> {

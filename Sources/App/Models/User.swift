@@ -14,6 +14,7 @@ final class User: PostgreSQLModel {
     }
 }
 
+// Database relationships
 extension User {
     
     var comments: Children<User, Comment> {

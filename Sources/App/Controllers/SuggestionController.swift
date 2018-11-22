@@ -3,6 +3,9 @@ import FluentPostgreSQL
 
 final class SuggestionController {
     
+    /// Obtains the complete list of suggestions
+    ///
+    /// - Parameter req: current request
     func list(_ req: Request) throws -> Future<[Suggestion.SuggestionForm]> {
         let futureSuggestions = Suggestion.query(on: req)
             .join(\User.id, to: \Suggestion.userID)
@@ -20,6 +23,9 @@ final class SuggestionController {
         }
     }
     
+    /// Obtains a specific suggestion
+    ///
+    /// - Parameter req: current request
     func show(_ req: Request) throws -> Future<Suggestion.SuggestionForm> {
         let futureSuggestion = try req.parameters.next(Suggestion.self)
         
@@ -34,6 +40,9 @@ final class SuggestionController {
         }
     }
     
+    /// Creates a new suggestion
+    ///
+    /// - Parameter req: current request
     func create(_ req: Request) throws -> Future<Response> {
         let futureSuggestion = try req.content.decode(Suggestion.self).flatMap { suggestion in
             return suggestion.save(on: req)

@@ -16,6 +16,8 @@ final class Comment: PostgreSQLModel {
     }
 }
 
+
+// Struct used for mapping the comment JSON response
 extension Comment {
     
     struct CommentForm: Content {
@@ -26,6 +28,7 @@ extension Comment {
     }
 }
 
+// Database relationships
 extension Comment {
     
     var user: Parent<Comment, User> {
