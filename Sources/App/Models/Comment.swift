@@ -17,7 +17,7 @@ final class Comment: PostgreSQLModel {
 }
 
 
-// Form used to map the comment JSON response
+// Form used for mapping the comment JSON response
 extension Comment {
     
     struct CommentForm: Content {
