@@ -10,6 +10,9 @@ final class UserController {
         return User.query(on: req).all()
     }
     
+    /// Obtains the comments from a user
+    ///
+    /// - Parameter req: current request
     func listComments(_ req: Request) throws -> Future<[Comment.CommentForm]> {
         let futureUser = try req.parameters.next(User.self)
         
