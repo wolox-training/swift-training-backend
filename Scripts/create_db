@@ -91,32 +91,32 @@ declare -a user_list=(
 	'{
 		"username": "admin",
 		"password": "admin",
-        "image": "https://goo.gl/1PBWVM"
+		"image": "https://goo.gl/1PBWVM"
 	}'
 	'{
 		"username": "juanrodriguez",
 		"password": "juanrodriguez",
-        "image": "https://goo.gl/1PBWVM"
+		"image": "https://goo.gl/1PBWVM"
 	}'
 	'{
 		"username": "manuelhernandez",
 		"password": "manuelhernandez",
-        "image": "https://goo.gl/1PBWVM"
+		"image": "https://goo.gl/1PBWVM"
 	}'
 	'{
 		"username": "rodrigogarcia",
 		"password": "rodrigogarcia",
-        "image": "https://goo.gl/1PBWVM"
+		"image": "https://goo.gl/1PBWVM"
 	}'
 	'{
 		"username": "sergiohernandez",
 		"password": "sergiohernandez",
-        "image": "https://goo.gl/1PBWVM"
+		"image": "https://goo.gl/1PBWVM"
 	}'
 	'{
 		"username": "test",
 		"password": "test",
-        "image": "https://goo.gl/1PBWVM"
+		"image": "https://goo.gl/1PBWVM"
 	}'
 )
 
