@@ -26,7 +26,7 @@ final class UserController {
         return futureComments.map { result in
             return try result.map { entities in
                 let (comment, book, user) = (entities.0.0, entities.0.1, entities.1)
-                return try Comment.CommentForm(id: comment.requireID(), content: comment.content, user: user, book: book)
+                return try Comment.CommentForm(id: comment.requireID(), content: comment.content, user: user.getSecuredUser(), book: book)
             }
         }
  
@@ -51,7 +51,7 @@ final class UserController {
         return futureRents.map { result in
             return try result.map { entities in
                 let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
-                return try Rent.RentForm(id: rent.requireID(), user: user, book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
+                return try Rent.RentForm(id: rent.requireID(), user: user.getSecuredUser(), book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
             }
         }
     }
@@ -75,7 +75,7 @@ final class UserController {
         return futureWishes.map { result in
             return try result.map { entities in
                 let (wish, book, user) = (entities.0.0, entities.0.1, entities.1)
-                return try Wish.WishForm(id: wish.requireID(), user: user, book: book)
+                return try Wish.WishForm(id: wish.requireID(), user: user.getSecuredUser(), book: book)
             }
         }
     }
@@ -108,7 +108,7 @@ final class UserController {
                 
                 let book = try bookCall.wait()
                 let rentForm = try Rent.RentForm(id: rent.requireID(),
-                                                 user: user,
+                                                 user: user.getSecuredUser(),
                                                  book: book,
                                                  from: rent.from,
                                                  to: rent.to,
@@ -145,7 +145,7 @@ final class UserController {
                 
                 let book = try bookCall.wait()
                 let wishForm = try Wish.WishForm(id: wish.requireID(),
-                                                 user: user,
+                                                 user: user.getSecuredUser(),
                                                  book: book)
                 
                 promise.succeed(result: wishForm)

@@ -49,7 +49,7 @@ final class BookController {
         return futureComments.map { result in
             return try result.map { entities in
                 let (comment, book, user) = (entities.0.0, entities.0.1, entities.1)
-                return try Comment.CommentForm(id: comment.requireID(), content: comment.content, user: user, book: book)
+                return try Comment.CommentForm(id: comment.requireID(), content: comment.content, user: user.getSecuredUser(), book: book)
             }
         }
         
@@ -102,7 +102,7 @@ final class BookController {
                 let user = try userCall.wait()
                 let commentForm = try Comment.CommentForm(id: comment.requireID(),
                                                           content: comment.content,
-                                                          user: user,
+                                                          user: user.getSecuredUser(),
                                                           book: book)
                 promise.succeed(result: commentForm)
             }

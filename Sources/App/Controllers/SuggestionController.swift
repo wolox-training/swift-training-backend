@@ -18,7 +18,7 @@ final class SuggestionController {
                                                      title: suggestion.title,
                                                      author: suggestion.author,
                                                      link: suggestion.link,
-                                                     user: user)
+                                                     user: user.getSecuredUser())
             }
         }
     }
@@ -35,7 +35,7 @@ final class SuggestionController {
                                                      title: suggestion.title,
                                                      author: suggestion.author,
                                                      link: suggestion.link,
-                                                     user: user)
+                                                     user: user.getSecuredUser())
             }
         }
     }
