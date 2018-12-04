@@ -26,7 +26,7 @@ extension Rent {
 
     struct RentForm: Content {
         var id: Int
-        var user: User
+        var user: User.SecuredUser
         var book: Book
         var from: Date
         var to: Date

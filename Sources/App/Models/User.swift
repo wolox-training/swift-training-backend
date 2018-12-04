@@ -14,6 +14,20 @@ final class User: PostgreSQLModel {
         self.password = password
         self.image = image
     }
+    
+    func getSecuredUser() -> SecuredUser {
+        return SecuredUser(id: id, username: username, image: image)
+    }
+}
+
+// Struct used when the passord needs to be hidden
+extension User {
+    
+    struct SecuredUser: Content {
+        var id: Int?
+        var username: String
+        var image: String?
+    }
 }
 
 // Database relationships
