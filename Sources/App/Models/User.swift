@@ -6,11 +6,27 @@ final class User: PostgreSQLModel {
     var id: Int?
     var username: String
     var password: String
+    var image: String?
         
-    init(id: Int? = nil, username: String, password: String) {
+    init(id: Int? = nil, username: String, password: String, image: String?) {
         self.id = id
         self.username = username
         self.password = password
+        self.image = image
+    }
+    
+    func getSecuredUser() -> SecuredUser {
+        return SecuredUser(id: id, username: username, image: image)
+    }
+}
+
+// Struct used when the passord needs to be hidden
+extension User {
+    
+    struct SecuredUser: Content {
+        var id: Int?
+        var username: String
+        var image: String?
     }
 }
 

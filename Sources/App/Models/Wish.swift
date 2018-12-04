@@ -19,7 +19,7 @@ extension Wish {
     
     struct WishForm: Content {
         var id: Int
-        var user: User
+        var user: User.SecuredUser
         var book: Book
     }
 }

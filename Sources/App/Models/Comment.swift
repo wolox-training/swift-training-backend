@@ -23,7 +23,7 @@ extension Comment {
     struct CommentForm: Content {
         var id: Int
         var content: String
-        var user: User
+        var user: User.SecuredUser
         var book: Book
     }
 }
