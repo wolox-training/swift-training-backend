@@ -15,7 +15,6 @@ final class BookController {
         }
     }
     
-    
     /// Obtains the complete list of books without pagination
     ///
     /// - Parameter req: current request
@@ -55,7 +54,6 @@ final class BookController {
         
     }
     
-    
     /// Obtains the book's suggestions from another book
     ///
     /// - Parameter req: current request
@@ -71,7 +69,6 @@ final class BookController {
         
         return futureSuggestions
     }
-    
     
     /// Obtains a specific book
     ///
@@ -124,7 +121,6 @@ final class BookController {
         
         return futureBook.encode(status: .created, for: req)
     }
-    
     
     /// Creates a comment
     ///
