@@ -4,15 +4,15 @@ import Vapor
 final class User: PostgreSQLModel {
     
     var id: Int?
-    var image: String?
     var username: String
     var password: String
+    var image: String?
         
-    init(id: Int? = nil, image: String?, username: String, password: String) {
+    init(id: Int? = nil, username: String, password: String, image: String?) {
         self.id = id
-        self.image = image
         self.username = username
         self.password = password
+        self.image = image
     }
 }
 
