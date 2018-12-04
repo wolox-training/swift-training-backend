@@ -6,11 +6,13 @@ final class User: PostgreSQLModel {
     var id: Int?
     var username: String
     var password: String
+    var image: String?
         
-    init(id: Int? = nil, username: String, password: String) {
+    init(id: Int? = nil, username: String, password: String, image: String?) {
         self.id = id
         self.username = username
         self.password = password
+        self.image = image
     }
 }
 
