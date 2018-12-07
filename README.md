@@ -31,16 +31,16 @@ curl https://swift-training-backend.herokuapp.com/books
 ## Running locally
 
 
-1) Clone the repository:
+1) Install Vapor:
 ```
-git clone git@github.com:wolox-training/swift-training-backend.git
-cd swift-training-backend
+brew install vapor/tap/vapor
 ```
 <br/>
 
-2) Install Vapor:
+2) Clone the repository:
 ```
-brew install vapor/tap/vapor
+git clone git@github.com:wolox-training/swift-training-backend.git
+cd swift-training-backend
 ```
 <br/>
 
