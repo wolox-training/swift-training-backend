@@ -30,31 +30,28 @@ curl https://swift-training-backend.herokuapp.com/books
 
 ## Running locally
 
-1) Install Vapor:
-```
-brew install vapor/tap/vapor
-```
 
-<br/>
-
-2) Install PostgreSQL:
-```
-brew install postgres
-brew services start postgresql
-```
-<br/>
-
-3) Prepare the DB:
-```
-createuser postgres -s
-createdb wbooks -O postgres
-```
-<br/>
-
-4) Clone and start the app:
+1) Clone the repository:
 ```
 git clone git@github.com:wolox-training/swift-training-backend.git
 cd swift-training-backend
+```
+<br/>
+
+2) Install Vapor:
+```
+brew install vapor/tap/vapor
+```
+<br/>
+
+3) Setup the database:
+```
+sh Scripts/install_postgres
+```
+<br/>
+
+4) Compile and start the app:
+```
 vapor update -y
 swift build
 swift run
