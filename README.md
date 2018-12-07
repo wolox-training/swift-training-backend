@@ -60,7 +60,7 @@ swift run
 
 5) Open another terminal and run the following code to add data into the DB:
 ```
-sh Scripts/create_db
+sh Scripts/insert_data
 ```
 <br/>
 
