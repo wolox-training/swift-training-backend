@@ -44,7 +44,7 @@ cd swift-training-backend
 ```
 <br/>
 
-3) Setup the database:
+3) Set up the database:
 ```
 sh Scripts/install_postgres
 ```
