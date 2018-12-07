@@ -53,8 +53,8 @@ sh Scripts/install_postgres
 4) Compile and start the app:
 ```
 vapor update -y
-swift build
-swift run
+vapor build
+vapor run
 ```
 <br/>
 
