@@ -30,13 +30,13 @@ curl https://swift-training-backend.herokuapp.com/books
 
 ## Running locally
 
-Run the following script to set up the project:
+First, set up the project with:
 ```
 sh Scripts/complete_installation
 ```
 <br/>
 
-Once finished, you can now run the project with:
+Once finished, you can start the app with:
 ```
 vapor run
 ```
@@ -87,7 +87,7 @@ It might take a while, but in the meantime you can check out the build logs from
 
 ## Logs
 
-You can see the remote logs with the following command:
+You can show the remote logs with the following command:
 ```
 heroku logs --tail
 ```
@@ -100,5 +100,5 @@ If Xcode doesn't show the correct files, or the project structure seems wrong, j
 ```
 vapor update -y
 ```
-This will update dependencies and create the appropiate Xcode project files. Xcode will restart after the command executes.
+This will update the dependencies and create the appropiate Xcode project files. Xcode will restart once the command finishes.
 
