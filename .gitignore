@@ -13,7 +13,6 @@ Package.resolved
 # Mac Noise
 .build
 xcuserdata
-*.xcodeproj
 DerivedData/
 .DS_Store
 */.DS_Store

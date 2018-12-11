@@ -1,0 +1,4 @@
+module CCryptoOpenSSL {
+    umbrella "/Users/gabrielmazzei/swift-training-backend/.build/checkouts/crypto.git-8233882816715270956/Sources/CCryptoOpenSSL/include"
+    export *
+}
