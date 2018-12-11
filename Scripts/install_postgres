@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if brew ls --versions postgres > /dev/null; then
-  echo "PostgreSQL already installed"
+  echo "PostgreSQL is already installed"
 else
   echo "Installing PostgreSQL"
   brew install postgres
@@ -14,4 +14,4 @@ dropuser --if-exists postgres
 createuser postgres -s
 createdb wbooks -O postgres
 
-echo "Done!"
+echo "Database created!"

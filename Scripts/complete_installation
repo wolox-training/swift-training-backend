@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if ! brew ls --versions vapor > /dev/null; then
+  echo "Installing Vapor..."
+  brew install vapor/tap/vapor
+fi
+
+sh Scripts/install_postgres
+
+vapor update -n
+vapor xcode -n
+vapor build
+
+echo "All done! :)"
+echo "You can now start the app with 'vapor run'"
