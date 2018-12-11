@@ -32,7 +32,7 @@ curl https://swift-training-backend.herokuapp.com/books
 
 Run the following script to set up the project:
 ```
-sh Script/complete_installation
+sh Scripts/complete_installation
 ```
 <br/>
 
