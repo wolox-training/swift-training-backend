@@ -100,5 +100,5 @@ If Xcode doesn't show the correct files, or the project structure seems wrong, j
 ```
 vapor update -y
 ```
-This will update the dependencies and create the appropiate Xcode project files. Xcode will restart once the command finishes.
+This will update the dependencies and generate the appropiate Xcode project files. Xcode will restart once the command finishes.
 
