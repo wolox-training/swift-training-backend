@@ -30,35 +30,19 @@ curl https://swift-training-backend.herokuapp.com/books
 
 ## Running locally
 
-
-1) Install Vapor:
+Run the following script to set up the project:
 ```
-brew install vapor/tap/vapor
-```
-<br/>
-
-2) Clone the repository:
-```
-git clone git@github.com:wolox-training/swift-training-backend.git
-cd swift-training-backend
+sh Scripts/complete_installation
 ```
 <br/>
 
-3) Set up the database:
+Once finished, you can now run the project with:
 ```
-sh Scripts/install_postgres
-```
-<br/>
-
-4) Compile and start the app:
-```
-vapor update -y
-vapor build
 vapor run
 ```
 <br/>
 
-5) Open another terminal and run the following code to add data into the DB:
+If you want to fill the database with made-up data, keep the app running and exectute this on another terminal:
 ```
 sh Scripts/insert_data
 ```
