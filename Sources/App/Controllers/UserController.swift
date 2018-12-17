@@ -83,6 +83,32 @@ final class UserController {
         }
     }
     
+    
+    /// Obtains the current rents from a user
+    ///
+    /// - Parameter req: current request
+    func currentRents(_ req: Request) throws -> Future<[Rent.RentForm]> {
+        let futureUser = try req.parameters.next(User.self)
+        
+        let futureRents = futureUser.flatMap { user in
+            return try user.rents
+                .query(on: req)
+                .filter(\Rent.returnedAt == nil)
+                .join(\Book.id, to: \Rent.bookID)
+                .join(\User.id, to: \Rent.userID)
+                .alsoDecode(Book.self)
+                .alsoDecode(User.self)
+                .all()
+        }
+        
+        return futureRents.map { result in
+            return try result.map { entities in
+                let (rent, book, user) = (entities.0.0, entities.0.1, entities.1)
+                return try Rent.RentForm(id: rent.requireID(), user: user.getSecuredUser(), book: book, from: rent.from, to: rent.to, returnedAt: rent.returnedAt)
+            }
+        }
+    }
+    
     /// Obtains a specific user
     ///
     /// - Parameter req: current request

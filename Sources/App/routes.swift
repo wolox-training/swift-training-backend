@@ -11,6 +11,7 @@ public func routes(_ router: Router) throws {
     router.post("users", use: userController.create)
     router.get("users", User.parameter, "rents", use: userController.listRents)
     router.get("users", User.parameter, "rents", Rent.parameter, use: userController.showRent)
+    router.get("users", User.parameter, "rents", "current", use: userController.currentRents)
     router.post("users", User.parameter, "rents", use: userController.createRent)
     router.get("users", User.parameter, "wishes", use: userController.listWishes)
     router.get("users", User.parameter, "wishes", Wish.parameter, use: userController.showWish)
