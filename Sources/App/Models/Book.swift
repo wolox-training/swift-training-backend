@@ -10,14 +10,11 @@ final class Book: PostgreSQLModel {
     var image: String?
     var year: String
     var genre: String
+    var status: String?
     
-    init(id: Int? = nil, author: String, title: String, image: String?, year: String, genre: String) {
-        self.id = id
-        self.author = author
-        self.title = title
-        self.image = image
-        self.year = year
-        self.genre = genre
+    func willCreate(on conn: PostgreSQLConnection) throws -> EventLoopFuture<Book> {
+        self.status = "Available"
+        return Future.map(on: conn) { self }
     }
 }
 
