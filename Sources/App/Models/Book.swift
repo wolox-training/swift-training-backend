@@ -10,14 +10,21 @@ final class Book: PostgreSQLModel {
     var image: String?
     var year: String
     var genre: String
+    var status: Status?
     
-    init(id: Int? = nil, author: String, title: String, image: String?, year: String, genre: String) {
+    init(id: Int? = nil, author: String, title: String, image: String?, year: String, genre: String, status: Status?) {
         self.id = id
         self.author = author
         self.title = title
         self.image = image
         self.year = year
         self.genre = genre
+        self.status = status
+    }
+    
+    func willCreate(on conn: PostgreSQLConnection) throws -> EventLoopFuture<Book> {
+        self.status = .available
+        return Future.map(on: conn) { self }
     }
 }
 
@@ -41,3 +48,9 @@ extension Book: Content {}
 extension Book: Migration {}
 extension Book: Parameter {}
 extension Book: Paginatable {}
+
+/// Book status: whether it is available or rented
+enum Status: String, PostgreSQLRawEnum {
+    case available
+    case rented
+}

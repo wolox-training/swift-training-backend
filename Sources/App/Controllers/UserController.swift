@@ -202,7 +202,12 @@ final class UserController {
     ///
     /// - Parameter req: current request
     func createRent(_ req: Request) throws -> Future<Response> {
-        let futureRent = try req.content.decode(Rent.self).flatMap { rent in
+        let futureRent = try req.content.decode(Rent.self).flatMap { rent -> Future<(Rent)> in
+            rent.book.get(on: req).whenSuccess { book in
+                book.status = .rented
+                _ = book.save(on: req)
+            }
+            
             return rent.save(on: req)
         }
         
