@@ -23,7 +23,7 @@ final class Book: PostgreSQLModel {
     }
 }
 
-// Database useful methods
+// Useful database methods
 extension Book {
    
     // Before saving the model in the database, the book status is set to "Available"
