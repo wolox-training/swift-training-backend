@@ -49,8 +49,8 @@ extension Book: Migration {}
 extension Book: Parameter {}
 extension Book: Paginatable {}
 
-/// Book status: whether it is available or rented
+/// Book status: whether it is available or rented (unavailable)
 enum Status: String, PostgreSQLRawEnum {
     case available
-    case rented
+    case unavailable
 }
