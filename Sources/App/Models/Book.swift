@@ -21,7 +21,13 @@ final class Book: PostgreSQLModel {
         self.genre = genre
         self.status = status
     }
-    
+}
+
+// Useful database methods
+extension Book {
+   
+    // Before saving the model in the database, the book status is set to "Available"
+    // regardless of the value given in the original request
     func willCreate(on conn: PostgreSQLConnection) throws -> EventLoopFuture<Book> {
         self.status = .available
         return Future.map(on: conn) { self }
@@ -49,8 +55,8 @@ extension Book: Migration {}
 extension Book: Parameter {}
 extension Book: Paginatable {}
 
-/// Book status: whether it is available or rented
+/// Book status: whether it is available or unavailable (rented)
 enum Status: String, PostgreSQLRawEnum {
-    case available
-    case rented
+    case available = "Available"
+    case unavailable = "Unavailable"
 }
