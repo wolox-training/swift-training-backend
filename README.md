@@ -1,3 +1,7 @@
+⚠️ Deprecated ⚠️
+<br/>
+Use this backend instead: [ios-training-backend](https://github.com/wolox-training/ios-training-backend)
+
 # swift-training-backend
 
 Backend for WBooks iOS Training, made entirely in Swift.
